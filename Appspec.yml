@@ -1,0 +1,27 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /path/to/deployment
+permissions:
+  - object: /path/to/deployment
+    pattern: "**"
+    owner: username
+    group: groupname
+hooks:
+  BeforeInstall:
+    - location: scripts/before-install.sh
+      timeout: 300
+      runas: username
+  AfterInstall:
+    - location: scripts/after-install.sh
+      timeout: 300
+      runas: username
+  ApplicationStart:
+    - location: scripts/application-start.sh
+      timeout: 300
+      runas: username
+  ApplicationStop:
+    - location: scripts/application-stop.sh
+      timeout: 300
+      runas: username
