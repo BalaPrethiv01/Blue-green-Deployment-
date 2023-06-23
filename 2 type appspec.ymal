@@ -1,8 +1,8 @@
 version: 0.0
 os: linux	
 files:	
-  - source: /index.html	  
-    destination: /var/www/html/	    
+  - source: /App.java	  
+    destination: /var/www/java/	    
 hooks:	
   BeforeInstall:	 
     - location: scripts/install_dependencies	   
@@ -11,3 +11,9 @@ hooks:
     - location: scripts/start_server	    
       timeout: 300	     
       runas: root	      
+#!/bin/bash
+sudo service apache2 start
+#!/bin/bash
+sudo apt-get update
+sudo apt-get -y install apache2
+sudo rm /var/www/java/App.java
