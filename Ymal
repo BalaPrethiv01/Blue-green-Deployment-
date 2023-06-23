@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-xxxxxxxxx  # Replace with your desired Amazon Machine Image (AMI) ID
+      InstanceType: t2.micro
+      KeyName: MyKeyPair  # Replace with your existing EC2 Key Pair name
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y java-11-openjdk
+          echo 'public class HelloWorld {
+              public static void main(String[] args) {
+                  System.out.println("Hello, World!");
+              }
+          }' > HelloWorld.java
+          javac HelloWorld.java
+          java HelloWorld
