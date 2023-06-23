@@ -17,3 +17,21 @@ sudo service apache2 start
 sudo apt-get update
 sudo apt-get -y install apache2
 sudo rm /var/www/java/App.java
+version: 0.0
+os: linux
+files:
+  - source: /App.java
+    destination: /var/www/java/
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies
+      timeout: 300
+      runas: root
+    - location: scripts/start_server
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_server
+      timeout: 300
+      runas: root
+
